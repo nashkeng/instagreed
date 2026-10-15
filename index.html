@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#14ae5c">
+  <meta name="description" content="A social feed with profiles, posts, and a working account demo.">
+  <title>Welcome — InstaGreed</title>
+  <link rel="icon" href="assets/brand-leaves.png" type="image/png">
+  <link rel="stylesheet" href="styles.css?v=brand-4">
+  <link rel="stylesheet" href="feed.css?v=brand-4">
+  <script src="feed.js?v=brand-4" defer></script>
+  <script src="app.js?v=brand-4" defer></script>
+</head>
+<body>
+  <div id="startup-error" class="startup-error" role="alert" hidden></div>
+  <main>
+    <section id="view-login" class="auth-view" aria-labelledby="login-title" hidden>
+      <img class="auth-brand" src="assets/brand-leaves.png" alt="InstaGreed logo" width="97" height="97">
+      <div class="auth-heading"><h1 id="login-title" tabindex="-1">Welcome Back</h1><p>Login to your account</p></div>
+      <form id="login-form" novalidate>
+        <p class="form-message" role="alert" hidden></p>
+        <div class="field"><label for="login-email">Email address</label><input id="login-email" name="email" type="email" autocomplete="username" placeholder="you@example.com" maxlength="254" required><p class="field-error" id="login-email-error" hidden></p></div>
+        <div class="field"><label for="login-password">Password</label><div class="password-input"><input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" maxlength="128" required><button class="password-toggle" type="button" data-toggle="login-password" aria-label="Show password">Show</button></div><p class="field-error" id="login-password-error" hidden></p></div>
+        <a class="forgot-link" href="#/forgot">Forgot password?</a>
+        <button class="primary-button login-button" type="submit">Log in <span aria-hidden="true">→</span></button>
+      </form>
+      <p class="auth-switch">Don’t have an account? <a href="#/signup">Sign up</a></p>
+    </section>
+
+    <section id="view-signup" class="auth-view compact-auth" aria-labelledby="signup-title" hidden>
+      <img class="auth-brand" src="assets/brand-leaves.png" alt="InstaGreed logo" width="97" height="97">
+      <div class="auth-heading"><h1 id="signup-title" tabindex="-1">Create Account</h1><p>Sign up to get started</p></div>
+      <form id="signup-form" novalidate>
+        <p class="form-message" role="alert" hidden></p>
+        <div class="field"><label for="signup-name">Your name</label><input id="signup-name" name="name" autocomplete="name" placeholder="What should we call you?" maxlength="60" required><p class="field-error" id="signup-name-error" hidden></p></div>
+        <div class="field"><label for="signup-email">Email address</label><input id="signup-email" name="email" type="email" autocomplete="username" placeholder="you@example.com" maxlength="254" required><p class="field-error" id="signup-email-error" hidden></p></div>
+        <div class="field"><label for="signup-password">Password <span class="label-note">8+ characters</span></label><div class="password-input"><input id="signup-password" name="password" type="password" autocomplete="new-password" placeholder="Create a demo password" minlength="8" maxlength="128" required><button class="password-toggle" type="button" data-toggle="signup-password" aria-label="Show password">Show</button></div><p class="field-error" id="signup-password-error" hidden></p></div>
+        <div class="field"><label for="signup-confirm">Confirm password</label><div class="password-input"><input id="signup-confirm" name="confirm" type="password" autocomplete="new-password" placeholder="Enter your password again" maxlength="128" required><button class="password-toggle" type="button" data-toggle="signup-confirm" aria-label="Show password">Show</button></div><p class="field-error" id="signup-confirm-error" hidden></p></div>
+        <p class="small-note form-note">This is a local demo. Use a made-up password; no verification email is sent.</p>
+        <button class="primary-button" type="submit">Sign up <span aria-hidden="true">→</span></button>
+      </form>
+      <p class="auth-switch">Already have an account? <a href="#/login">Log in</a></p>
+    </section>
+
+    <section id="view-forgot" class="auth-view compact-auth" aria-labelledby="forgot-title" hidden>
+      <a class="back-link" href="#/login">← Back to login</a>
+      <img class="auth-brand" src="assets/brand-leaves.png" alt="InstaGreed logo" width="97" height="97">
+      <div class="auth-heading"><h1 id="forgot-title" tabindex="-1">Forgot Password?</h1><p>Let’s get you back in</p></div>
+      <p class="auth-description">Enter your demo account’s email. A temporary reset code will appear here. No email is sent.</p>
+      <form id="forgot-form" novalidate>
+        <p class="form-message" role="alert" hidden></p>
+        <div class="field"><label for="forgot-email">Email address</label><input id="forgot-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required><p class="field-error" id="forgot-email-error" hidden></p></div>
+        <button class="primary-button" type="submit">Get reset code <span aria-hidden="true">→</span></button>
+      </form>
+      <aside id="reset-code-panel" class="reset-code-panel" hidden><span class="eyebrow">YOUR DEMO RESET CODE</span><p id="reset-code" class="reset-code"></p><p class="small-note">Valid for 10 minutes and one use. Only works for an account in this browser.</p><button id="use-reset-code" class="primary-button" type="button">Use this code <span aria-hidden="true">→</span></button></aside>
+      <p class="auth-switch">Have a code already? <a href="#/reset">Reset password</a></p>
+    </section>
+
+    <section id="view-reset" class="auth-view compact-auth" aria-labelledby="reset-title" hidden>
+      <a class="back-link" href="#/forgot">← Get a new reset code</a>
+      <img class="auth-brand" src="assets/brand-leaves.png" alt="InstaGreed logo" width="97" height="97">
+      <div class="auth-heading"><h1 id="reset-title" tabindex="-1">Reset Password</h1><p>Choose your new password</p></div>
+      <form id="reset-form" novalidate>
+        <p class="form-message" role="alert" hidden></p>
+        <div class="field"><label for="reset-email">Email address</label><input id="reset-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required><p class="field-error" id="reset-email-error" hidden></p></div>
+        <div class="field"><label for="reset-token">Reset code</label><input id="reset-token" name="code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit reset code" maxlength="6" required><p class="field-error" id="reset-token-error" hidden></p></div>
+        <div class="field"><label for="reset-password">New password <span class="label-note">8+ characters</span></label><div class="password-input"><input id="reset-password" name="password" type="password" autocomplete="new-password" placeholder="Create a new demo password" minlength="8" maxlength="128" required><button class="password-toggle" type="button" data-toggle="reset-password" aria-label="Show password">Show</button></div><p class="field-error" id="reset-password-error" hidden></p></div>
+        <div class="field"><label for="reset-confirm">Confirm new password</label><div class="password-input"><input id="reset-confirm" name="confirm" type="password" autocomplete="new-password" placeholder="Enter your new password again" maxlength="128" required><button class="password-toggle" type="button" data-toggle="reset-confirm" aria-label="Show password">Show</button></div><p class="field-error" id="reset-confirm-error" hidden></p></div>
+        <button class="primary-button" type="submit">Reset password <span aria-hidden="true">→</span></button>
+      </form>
+    </section>
+
+    <section id="view-success" class="auth-view success-view" aria-labelledby="success-title" hidden>
+      <img class="auth-brand" src="assets/brand-leaves.png" alt="InstaGreed logo" width="97" height="97">
+      <span class="success-check" aria-hidden="true">✓</span>
+      <div class="auth-heading"><h1 id="success-title" tabindex="-1">You’re logged in!</h1><p>Your demo account is ready</p></div>
+      <div class="profile-card"><span class="eyebrow">SIGNED IN AS</span><h2 id="success-name"></h2><p id="success-email"></p><span class="local-badge">Browser demo account</span></div>
+      <p class="success-note">This is your login success screen. Your account is saved in this browser, and your signed-in session stays in this tab.</p>
+      <button id="sign-out" class="primary-button" type="button">Sign out <span aria-hidden="true">→</span></button>
+    </section>
+    <section id="view-feed" class="feed-view" aria-labelledby="feed-title" hidden>
+      <header class="feed-header">
+        <a class="circle-brand" href="#/feed" aria-label="InstaGreed home"><img src="assets/brand-leaves.png" alt="" width="27" height="27">InstaGreed</a>
+        <button class="create-post-button" type="button" data-create-post><span aria-hidden="true">＋</span> Create post</button>
+        <button class="header-profile" data-feed-tab="profile" type="button" aria-label="Open your profile"><img id="feed-user-avatar" class="initial-avatar profile-photo" src="assets/nash-profile.jpg" alt="Your profile picture" width="44" height="44"></button>
+      </header>
+      <div class="feed-layout">
+        <nav class="feed-nav" aria-label="Feed navigation">
+          <span class="nav-label">YOUR SPACE</span>
+          <button class="feed-nav-button active" data-feed-tab="home" type="button" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/></svg><span>Home</span></button>
+          <button class="feed-nav-button" data-feed-tab="saved" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4Z"/></svg><span>Saved</span></button>
+          <button class="feed-nav-button" data-feed-tab="profile" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>Profile</span></button>
+          <button class="feed-nav-button" type="button" data-create-post><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 7v10M7 12h10"/></svg><span>Create</span></button>
+          <div class="nav-spacer"></div>
+          <button id="feed-sign-out" class="feed-nav-button signout-button" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3H4v18h6m5-14 5 5-5 5m-7-5h12"/></svg><span>Sign out</span></button>
+          <div class="circle-note"><img class="nav-brand-mark" src="assets/brand-leaves.png" alt="" width="24" height="24"><p>Little moments.<br>Good company.</p></div>
+        </nav>
+        <div class="feed-content">
+          <div id="feed-home" class="feed-pane">
+            <div class="feed-heading"><div><span class="feed-eyebrow">THE EVERYDAY, TOGETHER</span><h1 id="feed-title" tabindex="-1">Your feed</h1></div></div>
+            <section class="stories-card" aria-labelledby="stories-heading">
+              <div class="stories-heading"><h2 id="stories-heading">People you may know</h2><div class="story-arrows"><button id="stories-prev" class="small-icon-button" type="button" aria-label="Scroll profiles left"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><button id="stories-next" class="small-icon-button" type="button" aria-label="Scroll profiles right"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></div></div>
+              <div id="stories-track" class="stories-track" tabindex="0" aria-label="Profiles; scroll horizontally or use the arrow buttons">
+                <button class="story-button" type="button" data-story="0" data-story-name="Maya Reyes" data-story-detail="Finding little places that feel like a deep breath." aria-label="View Maya's profile"><span class="story-ring"><img src="assets/people-1.png" alt="" width="64" height="64"></span><span>Maya</span></button>
+                <button class="story-button" type="button" data-story="1" data-story-name="Rafi Cruz" data-story-detail="Coffee, cameras, and taking the scenic route." aria-label="View Rafi's profile"><span class="story-ring"><img src="assets/people-2.png" alt="" width="64" height="64"></span><span>Rafi</span></button>
+                <button class="story-button" type="button" data-story="2" data-story-name="Luna Park" data-story-detail="A sketchbook full of places I want to go." aria-label="View Luna's profile"><span class="story-ring"><img src="assets/people-3.png" alt="" width="64" height="64"></span><span>Luna</span></button>
+                <button class="story-button" type="button" data-story="3" data-story-name="Noah Reed" data-story-detail="Good music makes every walk a little better." aria-label="View Noah's profile"><span class="story-ring"><img src="assets/people-4.png" alt="" width="64" height="64"></span><span>Noah</span></button>
+                <button class="story-button" type="button" data-story="4" data-story-name="Ari Santos" data-story-detail="Chasing the afternoon light, one photo at a time." aria-label="View Ari's profile"><span class="story-ring"><img src="assets/people-jose.jpg" alt="" width="64" height="64"></span><span>Ari</span></button>
+                <button class="story-button" type="button" data-story="5" data-story-name="Elle Martin" data-story-detail="Flowers on my desk and a new book in my bag." aria-label="View Elle's profile"><span class="story-ring"><img src="assets/people-vice.jpg" alt="" width="64" height="64"></span><span>Elle</span></button>
+                <button class="story-button" type="button" data-story="6" data-story-name="Sam Lee" data-story-detail="Here for the outdoors and the people I meet along the way." aria-label="View Sam's profile"><span class="story-ring"><img src="assets/people-vic.jpg" alt="" width="64" height="64"></span><span>Sam</span></button>
+                <button class="story-button" type="button" data-story="7" data-story-name="Kai Brooks" data-story-detail="Small adventures, big memories." aria-label="View Kai's profile"><span class="story-ring"><img src="assets/people-bitoy.jpg" alt="" width="64" height="64"></span><span>Kai</span></button>
+              </div>
+            </section>
+            <div id="created-posts" class="created-posts" aria-label="Your published posts"></div>
+            <article id="sample-post" class="post-card" data-post-id="coast-01" aria-label="Post by Nash Amer L. Carampatana">
+              <header class="post-header"><img class="initial-avatar post-initial profile-photo" src="assets/nash-profile.jpg" alt="" width="44" height="44"><div><h2>Nash Amer L. Carampatana <span class="verified-mark" aria-label="Featured creator">✓</span></h2><p>Welcome to our community</p></div><span class="post-category">WELCOME</span></header>
+              <div class="post-image-wrap"><img class="post-image" src="assets/welcome-post.svg?v=brand-4" alt="Welcome to InstaGreed. Your circle starts here." width="1600" height="1200"></div>
+              <div class="post-body">
+                <div class="post-actions"><div><button id="post-like" class="icon-button" type="button" aria-label="Like post" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button id="post-comment" class="icon-button" type="button" aria-label="Write a comment"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-9.5 9L3 22l1.6-7A9 9 0 1 1 21 11.5Z"/></svg></button><button id="post-share" class="icon-button" type="button" aria-label="Copy post link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9L2 9 22 2ZM11 13 22 2"/></svg></button></div><button id="post-save" class="icon-button" type="button" aria-label="Save post" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4Z"/></svg></button></div>
+                <p class="post-likes"><strong id="like-count">128</strong> likes</p>
+                <p class="post-caption"><strong>Nash Amer L. Carampatana</strong> Welcome to InstaGreed! Share your first post and say hello to your circle. <span>🌿</span></p>
+                <p class="comment-label"><span id="comment-count">2</span> comments</p>
+                <div id="comment-list" class="comment-list"><p class="feed-comment"><strong class="comment-author">Rafi</strong> <span class="comment-text">Welcome to InstaGreed!</span></p><p class="feed-comment"><strong class="comment-author">Luna</strong> <span class="comment-text">Excited to be part of this circle.</span></p></div>
+                <form id="comment-form" class="comment-form"><label class="visually-hidden" for="comment-input">Add a comment</label><input id="comment-input" name="comment" placeholder="Add a little thought…" maxlength="300" required autocomplete="off"><button type="submit">Post <span aria-hidden="true">↗</span></button></form>
+                <span class="post-time">A LITTLE MOMENT FROM TODAY</span>
+              </div>
+            </article>
+          </div>
+          <div id="feed-saved" class="feed-pane" hidden><div class="feed-heading"><div><span class="feed-eyebrow">KEEP IT CLOSE</span><h1 tabindex="-1">Saved posts</h1></div></div><div id="saved-post-placeholder" class="feed-empty"><span aria-hidden="true">♡</span><h2>A place for your favorites</h2><p>Tap the bookmark on a post to keep it here.</p><button class="feed-primary" data-open-post type="button">Explore your feed</button></div><div class="saved-posts-list"><button id="saved-post-preview" class="saved-preview" data-open-post="coast-01" type="button" hidden><img src="assets/welcome-post.svg?v=brand-4" alt="Welcome to InstaGreed" width="1600" height="1200"><span><strong>Nash Amer L. Carampatana</strong><small>Welcome to InstaGreed</small></span><span aria-hidden="true">↗</span></button><div id="saved-created-posts"></div></div></div>
+          <div id="feed-profile" class="feed-pane" hidden><div class="feed-heading"><div><span class="feed-eyebrow">YOUR LITTLE CORNER</span><h1 tabindex="-1">Your profile</h1></div></div><div class="feed-profile-card"><img id="profile-avatar" class="large-initial-avatar profile-photo" src="assets/nash-profile.jpg" alt="Your profile picture" width="96" height="96"><h2 id="profile-name">Demo User</h2><p id="profile-email"></p><span class="profile-tag">Part of InstaGreed</span><p class="profile-description">A space for the little moments you love.<br>Your saved posts are always one tap away.</p><button class="feed-primary" data-feed-tab="saved" type="button">See saved posts <span aria-hidden="true">↗</span></button></div><div class="profile-posts-heading"><h2>Your posts</h2><span id="profile-post-count">0 posts</span></div><div id="profile-posts"></div><div id="profile-posts-empty" class="feed-empty"><h2>Share your first little moment</h2><p>Write a caption and add a photo if you like.</p><button class="feed-primary" type="button" data-create-post>Create your first post <span aria-hidden="true">＋</span></button></div></div>
+        </div>
+      </div>
+      <dialog id="feed-story-dialog" class="story-dialog" aria-labelledby="story-name"><button id="story-close" class="small-icon-button dialog-close" type="button" aria-label="Close profile">×</button><span class="story-preview-tag">PEOPLE YOU MAY KNOW</span><img id="story-avatar" class="story-preview-avatar" src="assets/people-1.png" alt="" width="112" height="112"><h2 id="story-name">Maya Reyes</h2><p id="story-detail"></p><a class="story-photo-credits" href="photo-credits.html" target="_blank" rel="noopener">Photo credits</a><button id="story-view-post" class="feed-primary" type="button">Back to the post <span aria-hidden="true">↗</span></button></dialog>
+      <dialog id="create-post-dialog" class="create-post-dialog" aria-labelledby="create-post-title"><button id="create-post-close" class="small-icon-button dialog-close" type="button" aria-label="Close create post">×</button><span class="feed-eyebrow">YOUR LITTLE MOMENT</span><h2 id="create-post-title">Create a post</h2><p class="composer-note">Share a caption, a photo, or both. Your post stays in this browser demo.</p><form id="create-post-form" novalidate><p id="create-post-error" class="form-message" role="alert" hidden></p><label for="create-post-caption">Caption</label><textarea id="create-post-caption" name="caption" placeholder="What would you like to share?" maxlength="1000" rows="5"></textarea><div class="caption-count"><span id="caption-count">0</span> / 1000</div><label for="create-post-image">Photo <span class="label-note">optional</span></label><input id="create-post-image" name="image" type="file" accept="image/png,image/jpeg,image/webp" aria-describedby="create-image-help"><p id="create-image-help" class="small-note">PNG, JPG or WebP, up to 5 MB. Resized locally before saving.</p><div id="create-image-preview" class="create-image-preview" hidden><img id="create-image" alt="Selected photo preview"><button id="remove-create-image" type="button" class="text-button">Remove photo</button></div><div class="composer-actions"><button id="cancel-create-post" class="composer-cancel" type="button">Cancel</button><button id="publish-post" class="feed-primary" type="submit">Publish post <span aria-hidden="true">→</span></button></div></form></dialog>
+      <dialog id="share-post-dialog" class="share-post-dialog" aria-labelledby="share-post-title"><button id="share-post-close" class="small-icon-button dialog-close" type="button" aria-label="Close share link">×</button><h2 id="share-post-title">Share this demo post</h2><p>This link opens the selected post on this computer after login. Created posts stay in this browser.</p><label class="visually-hidden" for="share-post-url">Post link</label><input id="share-post-url" type="text" readonly><button id="share-copy-link" class="feed-primary" type="button">Copy link</button><p id="share-copy-status" role="status" class="small-note"></p></dialog>
+      <p id="feed-status" class="feed-status" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <div id="loading" class="loading" role="status"><img src="assets/brand-leaves.png" alt="" width="44" height="44"><span>Getting your demo ready…</span></div>
+  <noscript><p class="startup-error">Enable JavaScript to use this working demo.</p></noscript>
+</body>
+</html>
